@@ -562,6 +562,11 @@ class Window(QtWidgets.QMainWindow):
         self.horizontalLayoutWidget.hide()
         self.frame_login.show()
         self.text_password.setText('')
+        self.list_ispis.clear()
+        self.graf.removeAllSeries()
+        self.kategorije_ispisa.setCurrentIndex(0)
+        self.kategorije_grafa.setCurrentIndex(0)
+        self.text_pretraga.setText('')
 
     # Funkcija za prijelaz u signup screen
     def signup(self):
@@ -704,12 +709,23 @@ class Window(QtWidgets.QMainWindow):
 
     # Funkcija za pretraživanje liste upisanih opodataka
     def pretrazi_listu(self):
-        # Uzimanje podataka o troškovima
+        # Pronalazak id-a za trenutnog korisnika
+        query_id = f"""
+                    SELECT id, email FROM KORISNIK
+                """
+
+        id = cur.execute(query_id).fetchall()
+
+        for i in id:
+            if i[1] == self.text_email.text():
+                id_korisnika = i[0]
+
+        # Uzimanje podataka o troškovima za ulogiranog korisnika
         query = f"""
                     SELECT datum, ime, prezime, naziv, cijena FROM trosak
                     LEFT JOIN korisnik ON korisnik.id = trosak.id_korisnika
                     LEFT JOIN kategorija ON kategorija.id = trosak.id_kategorije
-
+                    WHERE id_korisnika = {id_korisnika}
                 """
 
         data = cur.execute(query).fetchall()
@@ -759,10 +775,22 @@ class Window(QtWidgets.QMainWindow):
                                                   f'{d[4]}       {d[3]}')
 
     def prikazi_graf(self):
+        # Pronalazak id-a za trenutnog korisnika
+        query_id = f"""
+                            SELECT id, email FROM KORISNIK
+                        """
+
+        id = cur.execute(query_id).fetchall()
+
+        for i in id:
+            if i[1] == self.text_email.text():
+                id_korisnika = i[0]
+
         # Uzimanje podataka o troškovima
         query = f"""
                             SELECT datum, naziv, cijena FROM trosak
                             LEFT JOIN kategorija ON kategorija.id = trosak.id_kategorije
+                            WHERE id_korisnika = {id_korisnika}
                         """
 
         data = cur.execute(query).fetchall()
