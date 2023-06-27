@@ -518,7 +518,7 @@ class Window(QtWidgets.QMainWindow):
         self.graficki_prikaz.setRenderHint(QtGui.QPainter.Antialiasing)
         self.g_layout_graf.addWidget(self.graficki_prikaz, 1, 0, 1, 2)
 
-    # Funkcija za prijavu korisnika
+    # Metoda za prijavu korisnika
     def login(self):
         # Provjera ispravnosti emaila i passworda
         error_login = login_provjera(self.text_email.text(), self.text_password.text())
@@ -548,7 +548,7 @@ class Window(QtWidgets.QMainWindow):
                 self.list_ispis.insertItem(0, f'{ispis_troska[0]}       {ispis_troska[1]} {ispis_troska[2]}       '
                                                 f'{ispis_troska[4]}       {ispis_troska[3]}')
 
-    # Funkcija za odjavu korisnika
+    # Metoda za odjavu korisnika
     def logout(self):
         if self.frame_unos.isVisible():
             self.frame_unos.hide()
@@ -568,12 +568,12 @@ class Window(QtWidgets.QMainWindow):
         self.kategorije_grafa.setCurrentIndex(0)
         self.text_pretraga.setText('')
 
-    # Funkcija za prijelaz u signup screen
+    # Metoda za prijelaz u signup screen
     def signup(self):
         self.frame_login.hide()
         self.frame_signup.show()
 
-    # Funkcija za povratak iz signup-a u login screen
+    # Metoda za povratak iz signup-a u login screen
     def close_signup(self):
         self.frame_signup.hide()
         self.frame_login.show()
@@ -583,7 +583,7 @@ class Window(QtWidgets.QMainWindow):
         self.text_password_signup.setText('')
         self.text_potvrda_password_signup.setText('')
 
-    # Funkcija za kreiranje i spremanje novog korisnika
+    # Metoda za kreiranje i spremanje novog korisnika
     def prijava(self):
         # Provjera unesenih podataka
         error_signup = signup_provjera(self.text_ime_signup.text(), self.text_prezime_signup.text(),
@@ -613,7 +613,7 @@ class Window(QtWidgets.QMainWindow):
 
 
 
-    # Funkcija za prikaz displaya s unosom troskiva
+    # Metoda za prikaz displaya s unosom troskiva
     def display_unos(self):
         if self.frame_ispis.isVisible():
             self.frame_ispis.hide()
@@ -626,7 +626,7 @@ class Window(QtWidgets.QMainWindow):
         else:
             return
 
-    # Funkcija za prikaz displaya s unesenim troskovima
+    # Metoda za prikaz displaya s unesenim troskovima
     def display_uneseni(self):
         if self.frame_unos.isVisible():
             self.frame_unos.hide()
@@ -639,7 +639,7 @@ class Window(QtWidgets.QMainWindow):
         else:
             return
 
-    # Funkcija za prikaz displaya s grafom
+    # Metoda za prikaz displaya s grafom
     def display_grafikon(self):
         if self.frame_unos.isVisible():
             self.frame_unos.hide()
@@ -707,7 +707,7 @@ class Window(QtWidgets.QMainWindow):
         else:
             self.label_error_unosa.setText(error_unosa)
 
-    # Funkcija za pretraživanje liste upisanih opodataka
+    # Metoda za pretraživanje liste upisanih opodataka
     def pretrazi_listu(self):
         # Pronalazak id-a za trenutnog korisnika
         query_id = f"""
@@ -774,6 +774,7 @@ class Window(QtWidgets.QMainWindow):
                     self.list_ispis.insertItem(0, f'{d[0]}       {d[1]} {d[2]}       '
                                                   f'{d[4]}       {d[3]}')
 
+    # Metoda za prikaz grafa
     def prikazi_graf(self):
         # Pronalazak id-a za trenutnog korisnika
         query_id = f"""
