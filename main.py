@@ -905,12 +905,10 @@ class Window(QtWidgets.QMainWindow):
             max_y = 0
             min_y = 0
             i = 1
-            d_ispis = 0
             for d in data:
                 if self.kategorije_grafa.currentText() == d[1]:
                     self.linije_tel_internet.append(i, d[2])
                     i += 1
-                    d_ispis = d[2]
 
                     if max_y < d[2]:
                         max_y = d[2]
@@ -918,11 +916,9 @@ class Window(QtWidgets.QMainWindow):
                     if min_y > d[2] or min_y == 0:
                         min_y = d[2]
 
-            self.linije_tel_internet.append(i - 1, d_ispis + 0.01)  # Potrebno umetnuti, kako bi se iscrtao graf, pošto
-            self.linije_tel_internet.append(i - 1, d_ispis - 0.01)  # su troškovi iste vrijednosti
             self.os_x.setRange(1, i - 1)
             self.os_x.setTickCount(i - 1)
-            self.os_y.setRange(min_y-1, max_y+1)
+            self.os_y.setRange(min_y, max_y)
             self.graf.addSeries(self.linije_tel_internet)
 
         # Grafički prikaz troškova za tv
@@ -932,12 +928,10 @@ class Window(QtWidgets.QMainWindow):
             max_y = 0
             min_y = 0
             i = 1
-            d_ispis = 0
             for d in data:
                 if self.kategorije_grafa.currentText() == d[1]:
                     self.linije_tv.append(i, d[2])
                     i += 1
-                    d_ispis = d[2]
 
                     if max_y < d[2]:
                         max_y = d[2]
@@ -945,8 +939,8 @@ class Window(QtWidgets.QMainWindow):
                     if min_y > d[2] or min_y == 0:
                         min_y = d[2]
 
-            self.linije_tv.append(i-1, d_ispis+0.01)    # Potrebno umetnuti, kako bi se iscrtao graf, pošto su troškovi
-            self.linije_tv.append(i-1, d_ispis-0.01)    # iste vrijednosti
+            self.linije_tv.append(i-1, max_y + 0.01)    # Potrebno umetnuti, kako bi se iscrtao graf, pošto su troškovi
+            self.linije_tv.append(i-1, min_y - 0.01)    # iste vrijednosti
             self.os_x.setRange(1, i - 1)
             self.os_x.setTickCount(i - 1)
             self.os_y.setRange(min_y-1, max_y+1)
@@ -959,12 +953,10 @@ class Window(QtWidgets.QMainWindow):
             max_y = 0
             min_y = 0
             i = 1
-            d_ispis = 0
             for d in data:
                 if self.kategorije_grafa.currentText() == d[1]:
                     self.linije_komunalno.append(i, d[2])
                     i += 1
-                    d_ispis = d[2]
 
                     if max_y < d[2]:
                         max_y = d[2]
@@ -972,8 +964,8 @@ class Window(QtWidgets.QMainWindow):
                     if min_y > d[2] or min_y == 0:
                         min_y = d[2]
 
-            self.linije_komunalno.append(i - 1, d_ispis + 0.01)  # Potrebno umetnuti, kako bi se iscrtao graf, pošto su
-            self.linije_komunalno.append(i - 1, d_ispis - 0.01)  # troškovi iste vrijednosti
+            self.linije_komunalno.append(i - 1, max_y + 0.01)  # Potrebno umetnuti, kako bi se iscrtao graf, pošto su
+            self.linije_komunalno.append(i - 1, min_y - 0.01)  # troškovi iste vrijednosti
             self.os_x.setRange(1, i - 1)
             self.os_x.setTickCount(i - 1)
             self.os_y.setRange(min_y-1, max_y+1)
